@@ -1,5 +1,13 @@
 .header {
+  position: sticky;
+  width: 100%;
+  text-align: center;
 
+  .title {
+    color: white;
+    font-size: 2.4rem;
+    font-weight: 100;
+  }
 }
 .logo {
   margin: -58px 0 0 -100px;

@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    babel = require('gulp-babel'),
     gutil = require('gulp-util'),
     sass = require('gulp-sass'),
     browserSync = require('browser-sync'),
@@ -41,6 +42,9 @@ gulp.task('css', function () {
 gulp.task('js',function(){
   gulp.src('src/js/scripts.js')
     .pipe(sourcemaps.init())
+    .pipe(babel({
+        presets: ['env']
+    }))
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('default'))
     .pipe(header(banner, { package : package }))
@@ -65,7 +69,7 @@ gulp.task('bs-reload', function () {
     browserSync.reload();
 });
 
-gulp.task('default', ['css', 'js', 'browser-sync'], function () {
+gulp.task('default', ['css', 'js', 'browser-sync'], () => {
     gulp.watch("src/scss/**/*.scss", ['css']);
     gulp.watch("src/js/*.js", ['js']);
     gulp.watch("app/*.html", ['bs-reload']);
